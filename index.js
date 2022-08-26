@@ -14,20 +14,26 @@ app.use(express.json()); //to post json files
 
 const redux = require("redux");
 
-/*  action starts  */
+/*----  action starts  ----*/
 const CAKE_ORDERED = "CAKE_ORDERED";
+const CAKE_RESTOCKED = "CAKE_RESTOCKED";
 /* action creator function */
 function orderCake() {
   return {
     type: CAKE_ORDERED,
   };
 }
-/*  action ends  */
+function restockCake(payload) {
+  return {
+    type: CAKE_RESTOCKED,
+    payload: payload,
+  };
+}
+/*----  action ends  ----*/
 
-/* reducer starts */
+/*---- reducer starts ----*/
 const initialState = {
   numOfCakes: 10,
-  numOfIceCreams: 20,
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,31 +43,48 @@ const reducer = (state = initialState, action) => {
         ...state,
         numOfCakes: state.numOfCakes - 1,
       };
+    case CAKE_RESTOCKED:
+      return {
+        ...state,
+        numOfCakes: state.numOfCakes + action.payload,
+      };
     default:
       return state;
   }
 };
 /* A reducer is a function that receives the current state and an action object, decides how to update the state if necessary, and returns the new state */
-/* reducer ends */
+/*---- reducer ends ----*/
 
-/* store starts */
+/*---- store starts ----*/
 /* importing createStore method from redux. Createstore method takes reducer as its parameter */
 const createStore = redux.createStore;
+const bindActionCreators = redux.bindActionCreators;
 const store = createStore(reducer);
 
 console.log(`Initial state`, store.getState()); // to get the current state
 
+//to subscribe a listener
 const unsubscribe = store.subscribe(() =>
   console.log(`update state`, store.getState())
-); //to subscribe a listener
+);
 
-store.dispatch(orderCake()); // dispatching action creator as  function which returns an object = { type: CAKE_ORDERED,}
+// dispatching action creator as  function which returns an object = { type: CAKE_ORDERED,}
+/* store.dispatch(orderCake());
 store.dispatch(orderCake());
 store.dispatch(orderCake());
 
+store.dispatch(restockCake(3)); */
+
+//implementing bindActionCreators
+const actions = bindActionCreators({ orderCake, restockCake }, store.dispatch);
+
+actions.orderCake();
+actions.orderCake();
+actions.orderCake();
+actions.restockCake(5);
 unsubscribe();
 
-/* store ends */
+/*---- store ends ----*/
 
 /*==== Redux ends here =====  */
 
