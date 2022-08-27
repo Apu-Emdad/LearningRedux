@@ -151,7 +151,7 @@ actions.restockCake(5);
 actions.orderIceCream();
 actions.orderIceCream();
 actions.restockIceCream(2);
-unsubscribe();
+// unsubscribe();
 
 /*---- store ends ----*/
 
