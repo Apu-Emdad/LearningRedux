@@ -13,6 +13,8 @@ app.use(express.json()); //to post json files
 /*==== Redux starts here =====  */
 
 const redux = require("redux");
+const reduxLogger = require("redux-logger");
+const applyMiddleWare = redux.applyMiddleware;
 
 /*----  action starts  ----*/
 const CAKE_ORDERED = "CAKE_ORDERED";
@@ -120,7 +122,7 @@ const rootReducer = combineReducers({
 /* importing createStore method from redux. Createstore method takes reducer as its parameter */
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleWare(reduxLogger.logger));
 
 console.log(`Initial state`, store.getState()); // to get the current state
 
