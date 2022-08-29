@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json()); //to post json files
 
 /*==== Redux starts here =====  */
-
+console
 const redux = require("redux");
 
 /*----  action starts  ----*/
