@@ -25,25 +25,25 @@ const ICECREAM_RESTOCKED = "ICECREAM_RESTOCKED";
 function orderCake(qty = 1) {
   return {
     type: CAKE_ORDERED,
-    payload: qty,
+    payload: qty
   };
 }
 function restockCake(qty = 1) {
   return {
     type: CAKE_RESTOCKED,
-    payload: qty,
+    payload: qty
   };
 }
 function orderIceCream(qty = 1) {
   return {
     type: ICECREAM_ORDERED,
-    payload: qty,
+    payload: qty
   };
 }
 function restockIceCream(qty = 1) {
   return {
     type: ICECREAM_RESTOCKED,
-    payload: qty,
+    payload: qty
   };
 }
 /*----  action ends  ----*/
@@ -52,11 +52,11 @@ function restockIceCream(qty = 1) {
 const combineReducers = redux.combineReducers;
 
 const initialCakeState = {
-  numOfCakes: 10,
+  numOfCakes: 10
 };
 
 const initialIceCreamState = {
-  numOfIceCreams: 20,
+  numOfIceCreams: 20
 };
 
 /* const reducer = (state = initialState, action) => {
@@ -82,12 +82,12 @@ const cakeReducer = (state = initialCakeState, action) => {
     case CAKE_ORDERED:
       return {
         ...state,
-        numOfCakes: state.numOfCakes - 1,
+        numOfCakes: state.numOfCakes - 1
       };
     case CAKE_RESTOCKED:
       return {
         ...state,
-        numOfCakes: state.numOfCakes + action.payload,
+        numOfCakes: state.numOfCakes + action.payload
       };
     default:
       return state;
@@ -99,12 +99,12 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
     case ICECREAM_ORDERED:
       return {
         ...state,
-        numOfIceCreams: state.numOfIceCreams - 1,
+        numOfIceCreams: state.numOfIceCreams - 1
       };
     case ICECREAM_RESTOCKED:
       return {
         ...state,
-        numOfIceCreams: state.numOfIceCreams + action.payload,
+        numOfIceCreams: state.numOfIceCreams + action.payload
       };
 
     default:
@@ -114,17 +114,18 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
 
 const rootReducer = combineReducers({
   cake: cakeReducer,
-  iceCream: iceCreamReducer,
+  iceCream: iceCreamReducer
 });
 /*---- reducer ends ----*/
 
 /*---- store starts ----*/
 const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
 
 /* importing createStore method from redux. Createstore method takes reducer as its parameter.*/
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
-const store = createStore(rootReducer, applyMiddleWare(reduxLogger.logger));
+const store = createStore(rootReducer, applyMiddleWare(logger));
 
 console.log(`Initial state`, store.getState()); // to get the current state
 
