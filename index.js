@@ -13,7 +13,7 @@ app.use(express.json()); //to post json files
 /*==== Redux starts here =====  */
 
 const redux = require("redux");
-const reduxLogger = require("redux-logger");
+
 const applyMiddleWare = redux.applyMiddleware;
 
 /*----  action starts  ----*/
@@ -119,7 +119,9 @@ const rootReducer = combineReducers({
 /*---- reducer ends ----*/
 
 /*---- store starts ----*/
-/* importing createStore method from redux. Createstore method takes reducer as its parameter */
+const reduxLogger = require("redux-logger");
+
+/* importing createStore method from redux. Createstore method takes reducer as its parameter.*/
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
 const store = createStore(rootReducer, applyMiddleWare(reduxLogger.logger));
