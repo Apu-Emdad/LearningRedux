@@ -147,6 +147,12 @@ const actions = bindActionCreators(
   store.dispatch
 );
 
+
+// unsubscribe();
+
+/*---- store ends ----*/
+
+/* ---- Dispatching Actions starts ---- */
 actions.orderCake();
 actions.orderCake();
 actions.orderCake();
@@ -154,9 +160,7 @@ actions.restockCake(5);
 actions.orderIceCream();
 actions.orderIceCream();
 actions.restockIceCream(2);
-// unsubscribe();
-
-/*---- store ends ----*/
+/* ---- Dispatching Actions ends ---- */
 
 /*==== Redux ends here =====  */
 
